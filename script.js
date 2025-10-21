@@ -1,13 +1,14 @@
-document.getElementById("openBtn").addEventListener("click", function() {
-  const cover = document.getElementById("cover");
-  const main = document.getElementById("main");
+const targetDate = new Date("December 21, 2025 09:00:00").getTime();
+const countdown = document.getElementById("countdown");
 
-  // Sembunyikan cover
-  cover.style.display = "none";
+setInterval(() => {
+  const now = new Date().getTime();
+  const distance = targetDate - now;
 
-  // Tampilkan halaman utama dengan animasi fade-in
-  main.classList.remove("hidden");
-  setTimeout(() => {
-    main.classList.add("show");
-  }, 100);
-});
+  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const mins = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+  countdown.innerHTML = `${days} hari ${hours} jam ${mins} menit`;
+  if (distance < 0) countdown.innerHTML = "Hari ini!";
+}, 1000);
