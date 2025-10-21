@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Undangan Egah & Nisah</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Bagian Utama -->
+  <section class="hero fade-in">
+    <img src="IMG_20250808_213433.jpg" alt="Egah & Nisah" class="foto-pengantin">
+    <h1>Egah & Nisah</h1>
+    <p>Dengan penuh rasa syukur, kami mengundang Anda untuk hadir dalam acara pernikahan kami</p>
+    <a href="https://maps.google.com/?q=Taman+Krida+Budaya+Soekarno+Hatta" target="_blank" class="btn">Lihat Lokasi</a>
+  </section>
+
+  <!-- Detail Acara -->
+  <section class="acara fade-in">
+    <h2>Rangkaian Acara</h2>
+
+    <div class="card">
+      <h3>Akad Nikah</h3>
+      <p><strong>Sabtu, 31 Desember 2025</strong><br>
+      Pukul 08.00 WIB<br>
+      Taman Krida Budaya, Soekarno Hatta</p>
+    </div>
+
+    <div class="card">
+      <h3>Resepsi</h3>
+      <p><strong>Sabtu, 31 Desember 2025</strong><br>
+      Pukul 10.00 WIB - Selesai<br>
+      Taman Krida Budaya, Soekarno Hatta</p>
+    </div>
+  </section>
+
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+  const fadeElems = document.querySelectorAll('.fade-in');
+  
+  // Jalankan efek pertama kali (saat halaman baru dibuka)
+  fadeElems.forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 100) {
+      el.classList.add('visible');
+    }
+  });
+
+  // Jalankan juga setiap scroll
+  window.addEventListener('scroll', () => {
+    fadeElems.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight - 100) {
+        el.classList.add('visible');
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>
