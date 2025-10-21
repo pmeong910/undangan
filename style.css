@@ -124,3 +124,63 @@ html, body {
 #ayat { background: #fceee6; }
 #doa { background: #fff; }
 #maps { background: #f0f0f0; }
+/* 🌸 Cover section */
+.cover {
+  background: linear-gradient(180deg, #f6e6e4, #fffaf9);
+  color: #8b5c5c;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.cover-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 2s ease;
+}
+
+.cover h1 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 56px;
+  margin: 10px 0;
+}
+
+.cover h2 {
+  font-weight: 300;
+  font-size: 20px;
+  letter-spacing: 2px;
+}
+
+.cover .tanggal {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #7a6a6a;
+}
+
+.cover button {
+  margin-top: 30px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 24px;
+  background: #d19b9b;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.cover button:hover {
+  background: #b47d7d;
+}
+
+/* 🌸 Efek fade in lembut */
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 2s ease forwards;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}

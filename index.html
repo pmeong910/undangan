@@ -6,8 +6,23 @@
   <title>Egah & Nicah Wedding</title>
   <link rel="stylesheet" href="style.css">
 </head>
+<script>
+function scrollToNext() {
+  window.scrollTo({
+    top: window.innerHeight,
+    behavior: 'smooth'
+  });
+}
+</script>
 <body>
-
+<section id="cover" class="page cover">
+  <div class="cover-content">
+    <h2 class="fade-in">The Wedding of</h2>
+    <h1 class="fade-in nama">Egah & Nicah</h1>
+    <p class="fade-in tanggal">Sabtu, 15 Maret 2025</p>
+    <button onclick="scrollToNext()" class="fade-in">Buka Undangan</button>
+  </div>
+</section>
   <section class="page" id="pembuka">
     <h1>The Wedding of</h1>
     <h2>Egah & Nicah</h2>
