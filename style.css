@@ -1,40 +1,80 @@
 /* 🌸 Reset dan font dasar */
-body {
+* {
   margin: 0;
-  font-family: 'Poppins', sans-serif;
-  background: #fffaf9;
-  color: #333;
-  overflow-y: scroll;
-  height: auto;
-  scroll-behavior: smooth;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
-/* 🌸 Tiap halaman (section) */
-section {
- min-height: 100vh; /* Penuhi 1 layar */
+html, body {
+  height: 100%;
+  scroll-behavior: smooth;
+  background: #fffaf9;
+  color: #333;
+}
+
+/* 🌸 Cover section */
+.cover {
+  background: linear-gradient(180deg, #f6e6e4, #fffaf9);
+  color: #8b5c5c;
+}
+
+.cover-content {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  padding: 40px;
-  box-sizing: border-box;
-  animation: fadeIn 0.8s ease;
+  height: 100vh;
+  opacity: 1;
+  transition: opacity 1s ease;
+}
+.cover-content-fade-in {opacity: 1;}
+.cover-content.fade-out {opacity: 0;}
+
+/* 🌸 Tombol */
+button {
+  margin-top: 30px;
+  padding: 14px 30px;
+  border: none;
+  border-radius: 25px;
+  background: #d19b9b;
+  color: #fff;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
 }
 
-/* 🌸 Tampilan teks */
+button:hover {
+  background: #b47d7d;
+}
+
+/* 🌸 Teks */
 h1 {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 300;
   letter-spacing: 2px;
 }
 
 .nama {
   font-family: 'Great Vibes', cursive;
-  font-size: 48px;
+  font-size: 56px;
   color: #d19b9b;
 }
 
+.cover .tanggal {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #7a6a6a;
+}
+
+/* 🌸 Setiap section bisa ganti warna latar */
+#tanggal { background: #fff4f0; }
+#ayat { background: #fceee6; }
+#doa { background: #fff; }
+#maps { background: #f0f0f0; }
+
+/* 🌸 Konten umum */
 blockquote {
   font-style: italic;
   background: #fff;
@@ -49,138 +89,63 @@ blockquote {
   max-width: 600px;
 }
 
-.placeholder {
-  background: #f6eaea;
-  padding: 40px;
-  border-radius: 12px;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 80%;
-  max-width: 400px;
-}
-
-input, textarea, button {
-  padding: 10px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-}
-
-button {
-  background: #d19b9b;
-  color: white;
-  border: none;
-  font-weight: bold;
-}
-
 footer {
   text-align: center;
   padding: 20px;
   background: #fff3f3;
   font-size: 12px;
 }
+/* 🌸 Efek Fade In */
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 0.4s ease-out forwards;
+}
 
-/* 🌸 Animasi masuk */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+/* 🌸 Efek Fade Out (untuk cover saat tombol diklik) */
+.fade-out {
+  animation: fadeOut 0.4s ease-in forwards;
 }
 
-html, body {
-  height: 100%;
-  overflow-y: scroll;
-  scroll-behavior: smooth;
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
 }
-
+/* ✨ Section muncul dengan fade-in saat aktif */
 .page {
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 60px 20px;;
-  transition: background 1s, opacity 0.8s ease, transform 0,8s ease;
   opacity: 0;
   transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
 }
-.page.show {
+
+.page.active {
   opacity: 1;
   transform: translateY(0);
 }
-#pembuka { background: #f6e6e4; }
-#tanggal { background: #fff4f0; }
-#ayat { background: #fceee6; }
-#doa { background: #fff; }
-#maps { background: #f0f0f0; }
-/* 🌸 Cover section */
-.cover {
-  background: linear-gradient(180deg, #f6e6e4, #fffaf9);
-  color: #8b5c5c;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-}
-
-.cover-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  animation: fadeIn 2s ease;
-}
-
-.cover h1 {
-  font-family: 'Great Vibes', cursive;
-  font-size: 56px;
-  margin: 10px 0;
-}
-
-.cover h2 {
-  font-weight: 300;
-  font-size: 20px;
-  letter-spacing: 2px;
-}
-
-.cover .tanggal {
-  margin-top: 10px;
-  font-size: 14px;
-  color: #7a6a6a;
-}
-
-.cover button {
-  margin-top: 30px;
-  padding: 12px 24px;
-  border: none;
-  border-radius: 24px;
-  background: #d19b9b;
-  color: #fff;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.cover button:hover {
-  background: #b47d7d;
-}
-
-/* 🌸 Efek fade in lembut */
-.fade-in {
+/* 🌸 Efek fade-in umum untuk semua section */
+.fade-section {
   opacity: 0;
-  animation: fadeIn 2s ease forwards;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
 }
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+
+.fade-section.show {
+  opacity: 1;
+  transform: translateY(0);
 }

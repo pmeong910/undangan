@@ -5,50 +5,151 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Egah & Nicah Wedding</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* Tambahkan jika belum ada di style.css */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-out {
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    button {
+      padding: 12px 24px;
+      background: #d4a373;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #c18c5d;
+    }
+
+    .page {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .cover-content {
+      text-align: center;
+    }
+  </style>
 </head>
-<script>
-function scrollToNext() {
-  window.scrollTo({
-    top: window.innerHeight,
-    behavior: 'smooth'
-  });
-}
-</script>
 <body>
-<section id="cover" class="page cover">
-  <div class="cover-content">
-    <h2 class="fade-in">The Wedding of</h2>
-    <h1 class="fade-in nama">Egah & Nicah</h1>
-    <p class="fade-in tanggal">Sabtu, 15 Maret 2025</p>
-    <button onclick="scrollToNext()" class="fade-in">Buka Undangan</button>
-  </div>
-</section>
-  <section class="page" id="pembuka">
-    <h1>The Wedding of</h1>
-    <h2>Egah & Nicah</h2>
+
+  <!-- Halaman Cover -->
+  <section id="cover" class="page cover">
+    <div class="cover-content">
+      <h2 class="fade-in">The Wedding of</h2>
+      <h1 class="fade-in nama">Egah & Nicah</h1>
+      <p class="fade-in tanggal">Sabtu, 15 Maret 2025</p>
+      <button onclick="scrollToNext()" class="fade-in">Buka Undangan</button>
+    </div>
   </section>
 
-  <section class="page" id="tanggal">
+  <section class="page fade-section" id="tanggal">
     <h1>Sabtu, 12 Juli 2025</h1>
     <p>Taman Krida Budaya, Soekarno Hatta</p>
   </section>
 
-  <section class="page" id="ayat">
+  <section class="page fade-section" id="ayat">
     <h1>Surat Ar-Rum: 21</h1>
     <p>“Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan hidup…”</p>
   </section>
 
-  <section class="page" id="doa">
+  <section class="page fade-section" id="doa">
     <h1>Ucapan Doa</h1>
     <p>Semoga Egah & Nicah menjadi keluarga sakinah mawaddah warahmah.</p>
   </section>
 
-  <section class="page" id="maps">
+  <section class="page fade-section" id="maps">
     <h1>Lokasi Acara</h1>
     <p>Taman Krida Budaya, Soekarno Hatta</p>
     <a href="https://maps.app.goo.gl/" target="_blank">Lihat di Google Maps</a>
+    <br><br>
+    <button onclick="scrollToTop()" class="fade-in">Kembali ke Awal</button>
   </section>
 
-  <script src="script.js"></script>
+<script>
+function scrollToNext() {
+  const cover = document.querySelector('.cover-content');
+  const nextSection = document.querySelector('#tanggal');
+
+  // Jalankan fade-out pada cover
+  cover.classList.add('fade-out');
+
+  // Scroll ke section berikut
+  nextSection.scrollIntoView({ behavior: 'smooth' });
+}
+
+// ✨ Observer untuk memberi efek fade-in saat section muncul di layar
+const sections = document.querySelectorAll('.page');
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+      }
+    });
+  },
+  { threshold: 0.3 } // muncul 30% langsung fade-in
+);
+
+sections.forEach(section => observer.observe(section));
+</script>
+<script>
+function scrollToTop() {
+  const cover = document.querySelector('.cover-content');
+  
+  // Hapus efek fade-out biar cover tampil lagi
+  cover.classList.remove('fade-out');
+
+  // Scroll halus ke atas
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+}
+</script>
+<script>
+  // Observer untuk cek saat section masuk layar
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+      }
+    });
+  }, { threshold: 0.2 }); // mulai animasi saat 20% elemen terlihat
+
+  // Tambahkan observer ke semua section dengan class fade-section
+  document.querySelectorAll('.fade-section').forEach(section => {
+    observer.observe(section);
+  });
+</script>
 </body>
 </html>
