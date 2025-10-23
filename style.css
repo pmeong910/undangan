@@ -15,64 +15,168 @@ html, body {
 
 /* 🌸 Cover section */
 .cover {
-  background: linear-gradient(180deg, #f6e6e4, #fffaf9);
-  color: #8b5c5c;
+  position: relative;
+  background: url('IMG_20251023_102203.jpg') center/cover no-repeat;
+  color: #fff;
+  height: 100vh;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.cover::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 0;
 }
 
 .cover-content {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  opacity: 1;
-  transition: opacity 1s ease;
+  margin-bottom: 140px; /* agar tidak terlalu nempel ke tombol */
 }
-.cover-content-fade-in {opacity: 1;}
-.cover-content.fade-out {opacity: 0;}
 
-/* 🌸 Tombol */
-button {
-  margin-top: 30px;
-  padding: 14px 30px;
+/* 🌸 Tombol buka undangan */
+.open-btn {
+  position: absolute;
+  bottom: 50px;
+  transform: translateX(-50%);
+  z-index: 2;
+  padding: 12px 36px;
   border: none;
-  border-radius: 25px;
-  background: #d19b9b;
-  color: #fff;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #8b5c5c;
   font-weight: 600;
   font-size: 16px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
+  margin: 0;              /* ✅ hapus margin default tombol */
+  display: flex;          /* ✅ agar emoji & teks benar-benar sejajar */
+  align-items: center;    /* sejajarkan emoji dan teks secara vertikal */
+  gap: 6px;               /* beri jarak kecil antara emoji & teks */
+  text-align: center;     /* pastikan konten rata tengah */
+}
+.open-btn:hover {
+  background: #fff;
+  transform: translateX(-50%) scale(1.05);
 }
 
-button:hover {
-  background: #b47d7d;
+/* 🌸 Animasi fade berurutan */
+.fade-seq {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp 1s ease forwards;
+}
+.fade-seq.item1 { animation-delay: 0.5s; }
+.fade-seq.item2 { animation-delay: 1.5s; }
+.fade-seq.item3 { animation-delay: 2.5s; }
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* 🌸 Teks */
-h1 {
-  font-size: 22px;
+/* 🌸 Font nama */
+.cover h2 {
+  font-size: 18px;
   font-weight: 300;
   letter-spacing: 2px;
+  margin-top: -400px;
+  margin-bottom: 10px;
 }
 
-.nama {
+.cover .nama {
   font-family: 'Great Vibes', cursive;
-  font-size: 56px;
-  color: #d19b9b;
+  font-size: 58px;
+  color: #fff;
+  margin: 0;
+}
+.tanggal-bg, .doa-bg .invite-bg {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000; /* fallback jika gambar tidak muncul */
 }
 
-.cover .tanggal {
-  margin-top: 10px;
-  font-size: 14px;
-  color: #7a6a6a;
+.tanggal-bg {
+  position: absolute;
+  inset: 0;
+  background: url('bg2.jpg') center/cover no-repeat;
+  filter: brightness(0.7) blur(0px);
+  z-index: 0;
+  opacity: 1;
+}
+.ayat-bg {
+  position: absolute;
+  inset: 0;
+  background: url('bg3.jpg') center/cover no-repeat;
+  filter: brightness(0.7) blur(0px);
+  z-index: 0;
+  opacity: 1;
 }
 
-/* 🌸 Setiap section bisa ganti warna latar */
-#tanggal { background: #fff4f0; }
-#ayat { background: #fceee6; }
-#doa { background: #fff; }
-#maps { background: #f0f0f0; }
+/* 🌸 Foto utama (berisi ayat) */
+.ayat-img {
+  position: relative;
+  z-index: 1;
+  width: 400px;
+  height: auto;
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeFloat 6s eas, slideUp 5s ease-out forwards;}
+
+.doa-bg {
+  position: absolute;
+  inset: 0;
+  background: url('bg4.jpg') center/cover no-repeat;
+  filter: brightness(0.7) blur(0px);
+  z-index: 0;
+  opacity: 1;
+}
+/* ✨ Animasi fade + float */
+@keyframes fadeFloat {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+  @keyframes slideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(80px); /* mulai dari bawah */
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0); /* berhenti di posisi normal */
+  }
+}
 
 /* 🌸 Konten umum */
 blockquote {
@@ -95,7 +199,6 @@ footer {
   background: #fff3f3;
   font-size: 12px;
 }
-/* 🌸 Efek Fade In */
 .fade-in {
   opacity: 0;
   animation: fadeIn 0.4s ease-out forwards;
@@ -111,12 +214,6 @@ footer {
     transform: translateY(0);
   }
 }
-
-/* 🌸 Efek Fade Out (untuk cover saat tombol diklik) */
-.fade-out {
-  animation: fadeOut 0.4s ease-in forwards;
-}
-
 @keyframes fadeOut {
   from {
     opacity: 1;
@@ -148,4 +245,58 @@ footer {
 .fade-section.show {
   opacity: 1;
   transform: translateY(0);
+}
+/* Bungkus gambar */
+.image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Background statis */
+.bg-img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  top: 0;
+  left: 0;
+}
+
+/* Gambar utama (berisi teks) */
+.main-img {
+  position: absolute;
+  width: 70%;         /* bisa ubah 60–90% sesuai keinginan */
+  max-width: 500px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -30%);
+  opacity: 0;
+  animation: fadeSlideUp 1.5s ease forwards;
+  animation-delay: 0.3s;
+}
+
+/* Animasi gabungan fade + slide dari bawah */
+@keyframes fadeSlideUp {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 50%);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -30%);
+  }
+}
+
+/* Tombol kembali */
+.back-btn {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255,255,255,0.8);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
 }
