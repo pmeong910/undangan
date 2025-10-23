@@ -107,16 +107,7 @@ html, body {
   color: #fff;
   margin: 0;
 }
-.tanggal-bg, .doa-bg .invite-bg {
-  position: relative;
-  height: 100vh;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #000; /* fallback jika gambar tidak muncul */
-}
-
+  
 .tanggal-bg {
   position: absolute;
   inset: 0;
@@ -125,6 +116,17 @@ html, body {
   z-index: 0;
   opacity: 1;
 }
+  
+.tanggal-img {
+  position: relative;
+  z-index: 1;
+  width: 400px;
+  height: auto;
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeFloat 6s eas, slideUp 5s ease-out forwards;
+}
+
 .ayat-bg {
   position: absolute;
   inset: 0;
@@ -134,7 +136,6 @@ html, body {
   opacity: 1;
 }
 
-/* 🌸 Foto utama (berisi ayat) */
 .ayat-img {
   position: relative;
   z-index: 1;
@@ -142,7 +143,8 @@ html, body {
   height: auto;
   opacity: 0;
   transform: translateY(40px);
-  animation: fadeFloat 6s eas, slideUp 5s ease-out forwards;}
+  animation: fadeFloat 6s eas, slideUp 5s ease-out forwards;
+}
 
 .doa-bg {
   position: absolute;
@@ -151,6 +153,15 @@ html, body {
   filter: brightness(0.7) blur(0px);
   z-index: 0;
   opacity: 1;
+}
+.doa-img {
+  position: relative;
+  z-index: 1;
+  width: 400px;
+  height: auto;
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeFloat 6s eas, slideUp 5s ease-out forwards;
 }
 /* ✨ Animasi fade + float */
 @keyframes fadeFloat {
