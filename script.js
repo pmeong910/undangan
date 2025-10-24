@@ -60,6 +60,7 @@ if (countdown) {
 
 // 🌸 Tombol kembali ke atas (halaman maps)
 function scrollToTop() {
+  console.log("tombol kembali")
   const cover = document.querySelector("#cover");
 
   window.scrollTo({
