@@ -1,4 +1,4 @@
-/* 🌸 Reset dan font dasar */
+/* 🌸 Reset & dasar */
 * {
   margin: 0;
   padding: 0;
@@ -13,26 +13,51 @@ html, body {
   color: #333;
 }
 
-/* 🌸 Cover section */
-.cover {
+/* 🌸 Struktur umum setiap halaman */
+.page {
   position: relative;
-  background: url('IMG_20251023_102203.jpg') center/cover no-repeat;
-  color: #fff;
   height: 100vh;
+  width: 100%;
+  overflow: hidden;
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
 }
 
-.cover::before {
+/* 🌸 Efek overlay gelap lembut */
+.page::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.45);
+  background: rgba(0, 0, 0, 0.35);
   z-index: 0;
+}
+
+.section .main-img, .main-img {
+  position: relative;
+  z-index: 2;
+  width: 400px;          /* ubah sesuai kebutuhan */
+  height: auto;
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 1.2s ease, transform 1.2s ease;
+}
+
+/* Saat elemen terlihat di layar */
+.main-img.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* 🌸 Cover section */
+.cover {
+  background: url('IMG_20251023_102203.jpg') center/cover no-repeat;
+  color: #fff;
+}
+
+.cover::before {
+  background: rgba(0, 0, 0, 0.45);
 }
 
 .cover-content {
@@ -42,13 +67,84 @@ html, body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-bottom: 140px; /* agar tidak terlalu nempel ke tombol */
+  margin-bottom: 140px;
 }
 
+.cover h2 {
+  font-size: 28px;
+  font-weight: 300;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+/*.cover .nama {
+  font-family: 'Allura', cursive;
+  font-size: 58px;
+  color: #fff;
+  margin: 0;
+} */
+/* ✨ Animasi untuk semua teks nama */
+.nama {
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeSlideUp 1.5s ease forwards;
+}
+
+/* Tambahkan sedikit delay untuk efek berurutan */
+.nama:nth-child(1) { animation-delay: 0.3s; }
+.nama:nth-child(2) { animation-delay: 0.6s; }
+.nama:nth-child(3) { animation-delay: 0.9s; }
+.nama:nth-child(4) { animation-delay: 1.2s; }
+.nama:nth-child(5) { animation-delay: 1.5s; }
+.nama:nth-child(6) { animation-delay: 1.8s; }
+.nama:nth-child(7) { animation-delay: 2.1s; }
+.nama:nth-child(8) { animation-delay: 2.4s; }
+.nama:nth-child(9) { animation-delay: 2.8s; }
+.nama:nth-child(10) { animation-delay: 3.3s; }
+/* Masing-masing font */
+.nama.greatvibes {
+  font-family: 'Great Vibes', cursive;
+}
+
+.nama.allura {
+  font-family: 'Allura', cursive;
+}
+
+.nama.cookie {
+  font-family: 'Cookie', cursive;
+}
+
+.nama.montserrat {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.nama.satisfy {
+  font-family: 'Satisfy', cursive;
+}
+
+.nama.lora {
+  font-family: 'Lora', serif;
+}
+
+.nama.alexbrush {
+  font-family: 'Alex Brush', cursive;
+}
+
+.nama.inconsolata {
+  font-family: 'Inconsolata', monospace;
+}
+
+.nama.spacemono {
+  font-family: 'Space Mono', monospace;
+}
+
+.nama.robotomono {
+  font-family: 'Roboto Mono', monospace;
+}
 /* 🌸 Tombol buka undangan */
 .open-btn {
   position: absolute;
-  bottom: 50px;
+  bottom: 70px;
   transform: translateX(-50%);
   z-index: 2;
   padding: 12px 36px;
@@ -60,254 +156,124 @@ html, body {
   font-size: 16px;
   cursor: pointer;
   transition: all 0.3s ease;
-  margin: 0;              /* ✅ hapus margin default tombol */
-  display: flex;          /* ✅ agar emoji & teks benar-benar sejajar */
-  align-items: center;    /* sejajarkan emoji dan teks secara vertikal */
-  gap: 6px;               /* beri jarak kecil antara emoji & teks */
-  text-align: center;     /* pastikan konten rata tengah */
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
+
 .open-btn:hover {
   background: #fff;
   transform: translateX(-50%) scale(1.05);
 }
 
-/* 🌸 Animasi fade berurutan */
+/* 🌸 Animasi teks muncul berurutan di cover */
 .fade-seq {
   opacity: 0;
   transform: translateY(30px);
   animation: fadeUp 1s ease forwards;
 }
-.fade-seq.item1 { animation-delay: 0.5s; }
+.fade-seq.item1 { animation-delay: 1.5s; }
 .fade-seq.item2 { animation-delay: 1.5s; }
-.fade-seq.item3 { animation-delay: 2.5s; }
+.fade-seq.item3 { animation-delay: 3.4s; }
 
 @keyframes fadeUp {
-  from {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 🌸 Animasi umum fade + slide */
+@keyframes fadeSlideUp {
+  0% {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(80px);
   }
-  to {
+  100% {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-/* 🌸 Font nama */
-.cover h2 {
-  font-size: 18px;
-  font-weight: 300;
-  letter-spacing: 2px;
-  margin-top: -400px;
-  margin-bottom: 10px;
-}
-
-.cover .nama {
-  font-family: 'Great Vibes', cursive;
-  font-size: 58px;
-  color: #fff;
-  margin: 0;
-}
-  
-.tanggal-bg {
-  position: absolute;
-  inset: 0;
+/* 🌸 Section lain mirip cover */
+#tanggal {
   background: url('bg2.jpg') center/cover no-repeat;
-  filter: brightness(0.7) blur(0px);
-  z-index: 0;
-  opacity: 1;
-}
-  
-.tanggal-img {
-  position: relative;
-  z-index: 1;
-  width: 400px;
-  height: auto;
-  opacity: 0;
-  transform: translateY(40px);
-  animation: fadeFloat 6s eas, slideUp 5s ease-out forwards;
 }
 
-.ayat-bg {
-  position: absolute;
-  inset: 0;
+#ayat {
   background: url('bg3.jpg') center/cover no-repeat;
-  filter: brightness(0.7) blur(0px);
-  z-index: 0;
-  opacity: 1;
 }
 
-.ayat-img {
-  position: relative;
-  z-index: 1;
-  width: 400px;
-  height: auto;
-  opacity: 0;
-  transform: translateY(40px);
-  animation: fadeFloat 6s eas, slideUp 5s ease-out forwards;
-}
-
-.doa-bg {
-  position: absolute;
-  inset: 0;
+#doa {
   background: url('bg4.jpg') center/cover no-repeat;
-  filter: brightness(0.7) blur(0px);
-  z-index: 0;
-  opacity: 1;
-}
-.doa-img {
-  position: relative;
-  z-index: 1;
-  width: 400px;
-  height: auto;
-  opacity: 0;
-  transform: translateY(40px);
-  animation: fadeFloat 6s eas, slideUp 5s ease-out forwards;
-}
-/* ✨ Animasi fade + float */
-@keyframes fadeFloat {
-  0% {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  60% {
-    opacity: 1;
-    transform: translateY(-10px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-  @keyframes slideUp {
-  0% {
-    opacity: 0;
-    transform: translateY(80px); /* mulai dari bawah */
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0); /* berhenti di posisi normal */
-  }
 }
 
-/* 🌸 Konten umum */
-blockquote {
-  font-style: italic;
+#maps {
+  background: url('bg5.jpg') center/cover no-repeat;
+}
+
+/* 🌸 Tombol kembali di bagian maps */
+.back-btn {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255,255,255,0.8);
+  border: none;
+  padding: 10px 24px;
+  border-radius: 25px;
+  font-weight: 600;
+  color: #6b4f4f;
+  z-index: 2;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.back-btn:hover {
   background: #fff;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.05);
-  max-width: 80%;
+  transform: translateX(-50%) scale(1.05);
 }
 
-.gallery {
-  width: 100%;
-  max-width: 600px;
-}
-
-footer {
-  text-align: center;
-  padding: 20px;
-  background: #fff3f3;
-  font-size: 12px;
-}
-.fade-in {
-  opacity: 0;
-  animation: fadeIn 0.4s ease-out forwards;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-@keyframes fadeOut {
-  from {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  to {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-}
-/* ✨ Section muncul dengan fade-in saat aktif */
+/* 🌸 Transisi antar section */
 .page {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  opacity: 1;
+  transform: none;
+  transition: none;
 }
 
 .page.active {
   opacity: 1;
   transform: translateY(0);
 }
-/* 🌸 Efek fade-in umum untuk semua section */
-.fade-section {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.fade-section.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-/* Bungkus gambar */
-.image-wrapper {
+/* 🌄 Background tiap section */
+/* 🌸 Section umum */
+.section {
   position: relative;
-  width: 100%;
   height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   overflow: hidden;
 }
 
-/* Background statis */
-.bg-img {
+/* ✨ Lapisan gelap lembut di atas background */
+.section::before {
+  content: "";
   position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  top: 0;
-  left: 0;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35); /* opsional, bisa diubah tingkat gelapnya */
+  z-index: 0;
 }
 
-/* Gambar utama (berisi teks) */
-.main-img {
-  position: absolute;
-  width: 70%;         /* bisa ubah 60–90% sesuai keinginan */
-  max-width: 500px;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -30%);
-  opacity: 0;
-  animation: fadeSlideUp 1.5s ease forwards;
-  animation-delay: 0.3s;
-}
-
-/* Animasi gabungan fade + slide dari bawah */
+/* 🌟 Animasi lembut dari bawah ke atas */
 @keyframes fadeSlideUp {
   0% {
     opacity: 0;
-    transform: translate(-50%, 50%);
+    transform: translateY(80px);
   }
   100% {
     opacity: 1;
-    transform: translate(-50%, -30%);
+    transform: translateY(0);
   }
-}
-
-/* Tombol kembali */
-.back-btn {
-  position: absolute;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(255,255,255,0.8);
-  border: none;
-  padding: 10px 20px;
-  border-radius: 20px;
 }

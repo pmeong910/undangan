@@ -69,3 +69,31 @@ window.addEventListener("scroll", () => {
     pages.forEach(p => p.classList.remove("active"));
   }
 });
+const sections = document.querySelectorAll('.section');
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    const img = entry.target.querySelector('.main-img');
+    if (entry.isIntersecting) {
+      img.style.animation = 'slideUp 2.2s ease forwards';
+    } else {
+      img.style.animation = 'none';
+    }
+  });
+}, { threshold: 0.4 });
+
+sections.forEach(section => observer.observe(section));
+<script>
+const mainImgs = document.querySelectorAll('.main-img');
+const imgObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('show');
+    } else {
+      entry.target.classList.remove('show');
+    }
+  });
+}, { threshold: 0.3 });
+
+mainImgs.forEach(img => imgObserver.observe(img));
+</script>

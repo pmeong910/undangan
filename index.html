@@ -4,7 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Egah & Nicah Wedding</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=2">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Allura&family=Cookie&family=Montserrat&family=Satisfy&family=Lora&family=Alex+Brush&family=Inconsolata&family=Space+Mono&family=Roboto+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
   <style>
     /* Tambahkan jika belum ada di style.css */
     .fade-in {
@@ -62,44 +64,42 @@
 </head>
 <body>
 
-  <!-- Halaman Cover -->
 <section id="cover" class="page cover">
   <div class="cover-content">
     <h2 class="fade-seq item1">The Wedding of</h2>
-    <h1 class="fade-seq item2 nama">Egah & Nicah</h1>
+ <!-- <h1 class="fade-seq item2 nama">Egah & Nicah</h1> -->
+  <h1 class="nama greatvibes">1 Ega & Nica</h1>
+  <h1 class="nama allura">2 Ega & Nica</h1>
+  <h1 class="nama cookie">3 Ega & Nica</h1>
+  <h1 class="nama montserrat">4 Ega & Nica</h1>
+  <h1 class="nama satisfy">5 Ega & Nica</h1>
+  <h1 class="nama lora">6 Ega & Nica</h1>
+  <h1 class="nama alexbrush">7 Ega & Nica</h1>
+  <h1 class="nama inconsolata">8 Ega & Nica</h1>
+  <h1 class="nama spacemono">9 Ega & Nica</h1>
+  <h1 class="nama robotomono">10 Ega & Nica</h1>
+</section>
   </div>
-    <button onclick="scrollToNext()" class="open-btn fade-seq item3">
-      <span>💌</span> Buka Undangan
-    </button>
+  <button onclick="scrollToNext()" class="open-btn fade-seq item3">
+    <span>💌</span> Buka Undangan
+  </button>
 </section>
 
-<section class="page fade-section" id="tanggal">
-  <div class="image-wrapper">
-    <img src="bg2.jpg" class="bg-img">
-    <img src="date.png" class="main-img">
-  </div>
+<section id="tanggal" class="page section">
+  <img src="hal2.png" class="main-img">
 </section>
 
-<section class="page fade-section" id="ayat">
-  <div class="image-wrapper">
-    <img src="bg3.jpg" class="bg-img">
-    <img src="Picsart_25-10-23_15-39-33-238.png" class="main-img">
-  </div>
+<section id="ayat" class="page section">
+  <img src="Picsart_25-10-23_15-39-33-238.png" class="main-img">
 </section>
 
-<section class="page fade-section" id="doa">
-  <div class="image-wrapper">
-    <img src="bg4.jpg" class="bg-img">
-    <img src="Picsart_25-10-23_16-03-55-668.png" class="main-img">
-  </div>
+<section id="doa" class="page section">
+  <img src="Picsart_25-10-23_16-03-55-668.png" class="main-img">
 </section>
 
-<section class="page fade-section" id="maps">
-  <div class="image-wrapper">
-    <img src="bg5.jpg" class="bg-img">
-    <img src="img/maps-main.png" class="main-img">
-  </div>
-  <button onclick="scrollToTop()" class="fade-in back-btn">Kembali ke Awal</button>
+<section id="maps" class="page section">
+  <img src="hal5.png" class="main-img">
+  <button onclick="scrollToTop()" class="back-btn fade-in">Kembali ke Awal</button>
 </section>
 
 <script>
@@ -152,6 +152,20 @@ function scrollToTop() {
   document.querySelectorAll('.fade-section').forEach(section => {
     observer.observe(section);
   });
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const mainImgs = document.querySelectorAll('.main-img');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+      }
+    });
+  }, { threshold: 0.3 });
+
+  mainImgs.forEach(img => observer.observe(img));
+});
 </script>
 </body>
 </html>
