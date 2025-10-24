@@ -114,7 +114,11 @@ html , body{
   align-items: center;
   gap: 6px;
 }
-
+.open-btn.hide {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
 .open-btn:hover {
   background: #fff;
   transform: translateX(-50%) scale(1.05);
@@ -179,7 +183,26 @@ html , body{
   background: rgba(0, 0, 0, 0.35); /* opsional, bisa diubah tingkat gelapnya */
   z-index: 0;
 }
+.back-btn {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255,255,255,0.8);
+  border: none;
+  padding: 10px 24px;
+  border-radius: 25px;
+  font-weight: 600;
+  color: #6b4f4f;
+  z-index: 2;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
 
+.back-btn:hover {
+  background: #fff;
+  transform: translateX(-50%) scale(1.05);
+}
 /* 🌟 Animasi lembut dari bawah ke atas */
 @keyframes fadeSlideUp {
   0% {
