@@ -16,7 +16,7 @@ html , body{
   justify-content: center;
   align-items: center;
   text-align: center;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 /* 🌸 Background fix agar tidak zoom out */
@@ -221,6 +221,7 @@ html , body{
   background: rgba(0, 0, 0, 0.35); /* opsional, bisa diubah tingkat gelapnya */
   z-index: 0;
 }
+
 .back-btn {
   position: absolute;
   bottom: 40px;

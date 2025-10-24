@@ -4,14 +4,6 @@ function scrollToNext() {
   nextSection.scrollIntoView({ behavior: "smooth" });
 }
 
-// 🌸 Tombol kembali ke atas
-function scrollToTop() {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
-}
-
 // 🌸 Sembunyikan tombol buka undangan saat scroll melewati cover
 window.addEventListener("scroll", () => {
   const openBtn = document.querySelector(".open-btn");
@@ -65,24 +57,22 @@ if (countdown) {
       : "Hari ini!";
   }, 1000);
 }
+
 // 🌸 Tombol kembali ke atas (halaman maps)
-document.addEventListener("DOMContentLoaded", () => {
-  const backBtn = document.querySelector(".back-btn");
+function scrollToTop() {
   const cover = document.querySelector("#cover");
 
-  if (!backBtn || !cover) return; // safety check
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
 
-  backBtn.addEventListener("click", () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
-
-    // Tampilkan kembali cover
-    setTimeout(() => {
+  // Tampilkan kembali cover setelah sedikit delay
+  setTimeout(() => {
+    if (cover) {
       cover.style.display = "flex";
       cover.classList.remove("fade-out");
       cover.classList.add("fade-in");
-    }, 400);
-  });
-});
+    }
+  }, 400);
+}
