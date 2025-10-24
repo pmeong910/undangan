@@ -96,11 +96,12 @@ html , body{
 
 /* Tombol Buka Undangan */
 .open-btn {
-  position: absolute;
-  bottom: 50px;
-  left: 50%;
-  transform: translateX(-50%);
+  position: relative;
+  bottom: 0;
+  left: 0;
+  transform: none;
   z-index: 3;
+  margin-top: 40px;
   padding: 12px 36px;
   border: none;
   border-radius: 30px;
@@ -113,17 +114,19 @@ html , body{
   display: flex;
   align-items: center;
   gap: 6px;
+  opacity: 1;
 }
+
 .open-btn.hide {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.5s ease;
 }
+
 .open-btn:hover {
   background: #fff;
-  transform: translateX(-50%) scale(1.05);
+  transform: scale(1.05);
 }
-
 /* Animasi teks cover */
 .fade-seq {
   opacity: 0;
@@ -248,4 +251,9 @@ html , body{
     opacity: 1;
     transform: translateY(0);
   }
+}
+.hide {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
 }

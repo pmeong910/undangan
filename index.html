@@ -78,7 +78,6 @@
   <h1 class="nama inconsolata">8 Ega & Nica</h1>
   <h1 class="nama spacemono">9 Ega & Nica</h1>
   <h1 class="nama robotomono">10 Ega & Nica</h1>
-</section>
   </div>
   <button onclick="scrollToNext()" class="open-btn fade-seq item3">
     <span>💌</span> Buka Undangan
@@ -102,74 +101,6 @@
   <button onclick="scrollToTop()" class="back-btn fade-in">Kembali ke Awal</button>
 </section>
 
-  <script>
-  const openBtn = document.querySelector(".open-btn");
-  const cover = document.querySelector("#cover");
-
-  function scrollToNext() {
-    const nextSection = document.querySelector("#tanggal");
-    nextSection.scrollIntoView({ behavior: "smooth" });
-    openBtn.classList.add("hide");
-  }
-</script>
-<script>
-function scrollToTop() {
-  const cover = document.querySelector('.cover-content');
-
-  // Pastikan cover selalu tampak
-  cover.style.opacity = 1;
-
-  // Scroll halus ke atas
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth'
-  });
-}
-</script>
-<script>
-  // Observer untuk cek saat section masuk layar
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('show');
-      }
-    });
-  }, { threshold: 0.2 }); // mulai animasi saat 20% elemen terlihat
-
-  // Tambahkan observer ke semua section dengan class fade-section
-  document.querySelectorAll('.fade-section').forEach(section => {
-    observer.observe(section);
-  });
-</script>
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const mainImgs = document.querySelectorAll('.main-img');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('show');
-      }
-    });
-  }, { threshold: 0.3 });
-
-  mainImgs.forEach(img => observer.observe(img));
-});
-</script>
-<script>
-window.addEventListener("scroll", () => {
-  const openBtn = document.querySelector(".open-btn");
-  const cover = document.querySelector("#cover");
-
-  if (!openBtn || !cover) return; // safety check
-
-  const coverBottom = cover.getBoundingClientRect().bottom;
-
-  if (coverBottom <= 0) {
-    openBtn.classList.add("hide");
-  } else {
-    openBtn.classList.remove("hide");
-  }
-});
-</script>
+<script src="script.js"></script>
 </body>
 </html>

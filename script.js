@@ -1,91 +1,44 @@
-// 🌸 Efek fade-in tiap section saat discroll
-const sections = document.querySelectorAll('.page');
+// 🌸 Scroll ke section berikut (buka undangan)
+function scrollToNext() {
+  const nextSection = document.querySelector("#tanggal");
+  nextSection.scrollIntoView({ behavior: "smooth" });
+}
 
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('show');
-    } else {
-      entry.target.classList.remove('show');
-    }
+// 🌸 Tombol kembali ke atas
+function scrollToTop() {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
   });
-}, {
-  threshold: 0.2 // mulai animasi saat 20% bagian section terlihat
-});
+}
 
-sections.forEach(section => observer.observe(section));
-
-const targetDate = new Date("December 21, 2025 09:00:00").getTime();
-const countdown = document.getElementById("countdown");
-
-setInterval(() => {
-  const now = new Date().getTime();
-  const distance = targetDate - now;
-
-  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const mins = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-
-  countdown.innerHTML = `${days} hari ${hours} jam ${mins} menit`;
-  if (distance < 0) countdown.innerHTML = "Hari ini!";
-}, 1000);
+// 🌸 Sembunyikan tombol buka undangan saat scroll melewati cover
 window.addEventListener("scroll", () => {
-  const pages = document.querySelectorAll(".page");
+  const openBtn = document.querySelector(".open-btn");
+  const cover = document.querySelector("#cover");
+  if (!openBtn || !cover) return;
 
-  if (window.scrollY === 0) {
-    // Saat posisi di atas
-    cover.style.display = "flex";
-    cover.style.opacity = "1";
-    cover.classList.remove("fade-out");
-    cover.classList.add("fade-in");
-
-    // Pastikan isi cover muncul kembali
-    coverContent.style.opacity = "1";
-    coverContent.classList.remove("fade-out");
-    coverContent.classList.add("fade-in");
-
-    // Sembunyikan semua halaman lain
-    pages.forEach(p => p.classList.remove("active"));
+  const coverBottom = cover.getBoundingClientRect().bottom;
+  if (coverBottom <= 0) {
+    openBtn.classList.add("hide");
+  } else {
+    openBtn.classList.remove("hide");
   }
 });
-document.getElementById("bukaUndangan").addEventListener("click", () => {
 
-  setTimeout(() => {
-    cover.style.display = "none";
-    document.querySelector("#tanggal").classList.add("active");
-    window.scrollTo({ top: document.querySelector("#tanggal").offsetTop, behavior: "smooth" });
-  }, 800);
-});
-
-// 🌸 Menampilkan kembali cover saat scroll ke atas (halaman paling atas)
-window.addEventListener("scroll", () => {
-  if (window.scrollY === 0) {
-    // Pastikan cover ditampilkan kembali
-    cover.style.display = "flex";
-    cover.classList.remove("fade-out");
-    cover.classList.add("fade-in");
-
-    // Sembunyikan section lain agar tidak tumpang tindih
-    pages.forEach(p => p.classList.remove("active"));
-  }
-});
-const sections = document.querySelectorAll('.section');
-
-const observer = new IntersectionObserver(entries => {
+// 🌸 Efek fade-in tiap section saat terlihat
+const pages = document.querySelectorAll('.page');
+const pageObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
-    const img = entry.target.querySelector('.main-img');
-    if (entry.isIntersecting) {
-      img.style.animation = 'slideUp 2.2s ease forwards';
-    } else {
-      img.style.animation = 'none';
-    }
+    if (entry.isIntersecting) entry.target.classList.add('show');
   });
-}, { threshold: 0.4 });
+}, { threshold: 0.2 });
 
-sections.forEach(section => observer.observe(section));
-<script>
+pages.forEach(page => pageObserver.observe(page));
+
+// 🌸 Animasi gambar utama (main-img)
 const mainImgs = document.querySelectorAll('.main-img');
-const imgObserver = new IntersectionObserver((entries) => {
+const imgObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.classList.add('show');
@@ -96,4 +49,40 @@ const imgObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.3 });
 
 mainImgs.forEach(img => imgObserver.observe(img));
-</script>
+
+// 🌸 Countdown (jika ada)
+const countdown = document.getElementById("countdown");
+if (countdown) {
+  const targetDate = new Date("December 21, 2025 09:00:00").getTime();
+  setInterval(() => {
+    const now = new Date().getTime();
+    const distance = targetDate - now;
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const mins = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    countdown.innerHTML = distance > 0
+      ? `${days} hari ${hours} jam ${mins} menit`
+      : "Hari ini!";
+  }, 1000);
+}
+// 🌸 Tombol kembali ke atas (halaman maps)
+document.addEventListener("DOMContentLoaded", () => {
+  const backBtn = document.querySelector(".back-btn");
+  const cover = document.querySelector("#cover");
+
+  if (!backBtn || !cover) return; // safety check
+
+  backBtn.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+    // Tampilkan kembali cover
+    setTimeout(() => {
+      cover.style.display = "flex";
+      cover.classList.remove("fade-out");
+      cover.classList.add("fade-in");
+    }, 400);
+  });
+});
