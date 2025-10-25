@@ -58,16 +58,6 @@ if (countdown) {
   }, 1000);
 }
 
-// 🌸 Tombol kembali ke atas (halaman maps)
-function scrollToTop() {
-  console.log("tombol kembali")
-  const cover = document.querySelector("#cover");
-
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
-
   // Tampilkan kembali cover setelah sedikit delay
   setTimeout(() => {
     if (cover) {
@@ -76,4 +66,3 @@ function scrollToTop() {
       cover.classList.add("fade-in");
     }
   }, 400);
-}
