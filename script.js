@@ -39,14 +39,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   fadeItems.forEach(item => item.classList.add("fade-content"));
 
-  const fadeObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      entry.target.classList.toggle("show", entry.isIntersecting);
-    });
-  }, { threshold: 0.3 });
-
-  fadeItems.forEach(item => fadeObserver.observe(item));
+  // 🌸 Efek fade-in untuk elemen yang muncul di layar (tanpa fade-out)
+const fadeObserver = new IntersectionObserver(entries => {
+entries.forEach(entry => {
+entry.target.classList.toggle("show", entry.isIntersecting);
 });
+}, { threshold: 0.3 });
+
+fadeItems.forEach(item => fadeObserver.observe(item));
+});
+
 
 // 🌸 Countdown (jika ada)
 const countdown = document.getElementById("countdown");
