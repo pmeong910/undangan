@@ -1,7 +1,24 @@
 // 🌸 Scroll ke section berikut (buka undangan)
 function scrollToNext() {
   const nextSection = document.querySelector("#tanggal");
-  nextSection.scrollIntoView({ behavior: "smooth" });
+  if (nextSection) {
+    nextSection.scrollIntoView({ behavior: "smooth" });
+  }
+}
+
+// 🌸 Tombol kembali ke atas
+function scrollToTop() {
+  const cover = document.querySelector("#cover");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+
+  // Tampilkan kembali cover setelah sedikit delay
+  setTimeout(() => {
+    if (cover) {
+      cover.style.display = "flex";
+      cover.classList.remove("fade-out");
+      cover.classList.add("fade-in");
+    }
+  }, 400);
 }
 
 // 🌸 Sembunyikan tombol buka undangan saat scroll melewati cover
@@ -11,36 +28,25 @@ window.addEventListener("scroll", () => {
   if (!openBtn || !cover) return;
 
   const coverBottom = cover.getBoundingClientRect().bottom;
-  if (coverBottom <= 0) {
-    openBtn.classList.add("hide");
-  } else {
-    openBtn.classList.remove("hide");
-  }
+  openBtn.classList.toggle("hide", coverBottom <= 0);
 });
 
-// 🌸 Efek fade-in tiap section saat terlihat
-const pages = document.querySelectorAll('.page');
-const pageObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) entry.target.classList.add('show');
-  });
-}, { threshold: 0.2 });
+// 🌸 Efek fade-in hanya untuk gambar & layer (tidak termasuk background)
+document.addEventListener("DOMContentLoaded", () => {
+  const fadeItems = document.querySelectorAll(
+    "#tanggal .main-img, #ayat .dual-layer, #doa .dual-layer"
+  );
 
-pages.forEach(page => pageObserver.observe(page));
+  fadeItems.forEach(item => item.classList.add("fade-content"));
 
-// 🌸 Animasi gambar utama (main-img)
-const mainImgs = document.querySelectorAll('.main-img');
-const imgObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('show');
-    } else {
-      entry.target.classList.remove('show');
-    }
-  });
-}, { threshold: 0.3 });
+  const fadeObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      entry.target.classList.toggle("show", entry.isIntersecting);
+    });
+  }, { threshold: 0.3 });
 
-mainImgs.forEach(img => imgObserver.observe(img));
+  fadeItems.forEach(item => fadeObserver.observe(item));
+});
 
 // 🌸 Countdown (jika ada)
 const countdown = document.getElementById("countdown");
@@ -57,12 +63,3 @@ if (countdown) {
       : "Hari ini!";
   }, 1000);
 }
-
-  // Tampilkan kembali cover setelah sedikit delay
-  setTimeout(() => {
-    if (cover) {
-      cover.style.display = "flex";
-      cover.classList.remove("fade-out");
-      cover.classList.add("fade-in");
-    }
-  }, 400);
