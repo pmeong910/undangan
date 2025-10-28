@@ -21,7 +21,7 @@ function scrollToTop() {
   }, 400);
 }
 
-// 🌸 Sembunyikan tombol buka undangan saat scroll melewati cover
+// 🌸 Tombol buka undangan hilang saat scroll lewat cover
 window.addEventListener("scroll", () => {
   const openBtn = document.querySelector(".open-btn");
   const cover = document.querySelector("#cover");
@@ -31,24 +31,40 @@ window.addEventListener("scroll", () => {
   openBtn.classList.toggle("hide", coverBottom <= 0);
 });
 
-// 🌸 Efek fade-in hanya untuk gambar & layer (tidak termasuk background)
 document.addEventListener("DOMContentLoaded", () => {
   const fadeItems = document.querySelectorAll(
     "#tanggal .main-img, #ayat .dual-layer, #doa .dual-layer"
   );
 
-  fadeItems.forEach(item => item.classList.add("fade-content"));
+  const fadeObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Hapus lalu tambahkan ulang class supaya animasi bisa diulang
+        entry.target.classList.remove("show");
+        void entry.target.offsetWidth; // trik reflow agar browser anggap ini baru
+        entry.target.classList.add("show");
+      } else {
+        // Saat keluar viewport, reset (supaya bisa animasi lagi nanti)
+        entry.target.classList.remove("show");
+      }
+    });
+  }, { threshold: 0.4 }); // bisa disesuaikan
 
-  // 🌸 Efek fade-in untuk elemen yang muncul di layar (tanpa fade-out)
-const fadeObserver = new IntersectionObserver(entries => {
-entries.forEach(entry => {
-entry.target.classList.toggle("show", entry.isIntersecting);
+  fadeItems.forEach(item => fadeObserver.observe(item));
 });
-}, { threshold: 0.3 });
 
-fadeItems.forEach(item => fadeObserver.observe(item));
-});
+const doaSection = document.querySelector('#doa .dual-layer');
 
+const doaObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('show');
+      doaObserver.unobserve(entry.target); // hentikan agar tidak loop
+    }
+  });
+}, { threshold: 0.5 });
+
+if (doaSection) doaObserver.observe(doaSection);
 
 // 🌸 Countdown (jika ada)
 const countdown = document.getElementById("countdown");
