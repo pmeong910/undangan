@@ -7,6 +7,16 @@ html, body {
   scroll-behavior: smooth;
 }
 
+canvas#aurora {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* supaya di belakang konten */
+  pointer-events: none; /* biar tidak menghalangi klik */
+}
+
 .page, .section {
   position: relative;
   height: 100vh;
@@ -56,6 +66,7 @@ html, body {
 .cover {
   background: url('IMG_20251023_102203.jpg') center/cover no-repeat;
   color: #fff;
+  overflow:hidden;
 }
 
 .cover::before {
@@ -71,20 +82,39 @@ html, body {
 }
 
 .cover h2 {
+  font-family: 'Sunkiss Script', cursive;
   font-size: 18px;
   font-weight: 300;
   letter-spacing: 2px;
   margin-bottom: 10px;
-}
-
+} 
 .cover .nama {
   font-family: 'Great Vibes', cursive;
   font-size: 40px;
   color: #fff;
   margin: 0;
 }
+#catchMe {
+  all: unset;
+  position: absolute;
+  padding: 5px;
+  width: 120px;
+  text-align: center;
+  background: #006eff;
+  border-radius: 7px;
+  color: #fff;
+  font-weight: 300;
+  font-family: 'Consolas', sans-serif;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  user-select:none;
+}
+#catchMe:hover {
+  background: fff;
+  transform:scale(1.0);
 
-/* 🌸 TOMBOL */
+}
+/* 🌸 TOMBOL
 .open-btn {
   position: relative;
   bottom: 100px;
@@ -99,7 +129,7 @@ html, body {
   display: flex;
   align-items: center;
   gap: 6px;
-}
+} 
 
 .open-btn:hover {
   background: #fff;
@@ -188,8 +218,16 @@ max-width: 500px;
 position: absolute;
 z-index: 2;
 opacity: 0;
-animation: fadeLayerAyat 2.5s ease forwards;
-animation-delay: 0.8s;
+
+}
+
+#ayat {
+  position: relative; /* penting agar canvas bisa absolute di dalamnya */
+  overflow: hidden; /* biar efeknya nggak keluar area section */
+}
+#ayat.show .fade-img {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 @keyframes fadeLayerAyat {
@@ -199,77 +237,76 @@ to { opacity: 1; transform: translateY(0); }
 
 /* 🌸 PARALLAX SECTION (untuk doa) */
 #doa {
-  position: relative;
-  height: 250vh;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+position: relative;
+height: 250vh;
+overflow: hidden;
+display: flex;
+justify-content: center;
+align-items: center;
 }
 
 /* 🌄 Background parallax (tetap diam) */
 #doa::before {
-  content: "";
-  position: fixed; /* parallax */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: url('bg4.jpg') center/cover no-repeat;
-  z-index: -2; /* di belakang semuanya */
+content: "";
+position: fixed; / parallax /
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: url('bg4.jpg') center/cover no-repeat;
+z-index: -2; / di belakang semuanya */
 }
 
 /* 🌸 Lapisan lembut */
 #doa::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  backdrop-filter: blur(3px);
-  background: rgba(0,0,0,0.25);
-  z-index: -1;
+content: "";
+position: absolute;
+inset: 0;
+backdrop-filter: blur(3px);
+background: rgba(0,0,0,0.25);
+z-index: -1;
 }
 
 /* 🌸 Dual layer container */
 #doa .dual-layer {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+position: relative;
+display: flex;
+justify-content: center;
+align-items: center;
 }
 
 /* 🌸 Gambar dasar (diam) */
 #doa .base-img {
-  width: 90%;
-  max-width: 500px;
-  height: auto;
-  opacity: 0.9;
-  position: relative;
-  z-index: 1;
+width: 90%;
+max-width: 500px;
+height: auto;
+opacity: 0.9;
+position: relative;
+z-index: 1;
 }
 
 /* 🌸 Gambar overlay (muncul perlahan di atasnya) */
 #doa .fade-img {
-  width: 90%;
-  max-width: 500px;
-  height: auto;
-  position: absolute;
-  z-index: 2;
-  opacity: 0;
-  transform: translateY(60px);
-  animation: fadeLayerParallax 2.5s ease forwards;
-  animation-delay: 3s; /* jeda biar muncul sedikit setelah dasar */
+width: 90%;
+max-width: 500px;
+height: auto;
+position: absolute;
+z-index: 2;
+opacity: 0;
+transform: translateY(60px);
+animation: fadeLayerParallax 2.5s ease forwards;
+animation-delay: 3s; / jeda biar muncul sedikit setelah dasar */
 }
 
 /* 🌈 Animasi fade lembut */
 @keyframes fadeLayerParallax {
-  from {
-    opacity: 0;
-    transform: translateY(60px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+from {
+opacity: 0;
+transform: translateY(60px);
+}
+to {
+opacity: 1;
+transform: translateY(0);
 }
 
 .fade-content {
