@@ -17,39 +17,41 @@ window.addEventListener("scroll", () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  const fadeItems = document.querySelectorAll(
-    "#tanggal .main-img, #ayat"
-  );
+  // 🌸 Fade-in untuk tanggal dan ayat (bisa reset)
+  const fadeItems = document.querySelectorAll("#tanggal .main-img, #ayat .dual-layer");
 
   const fadeObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        // Hapus lalu tambahkan ulang class supaya animasi bisa diulang
         entry.target.classList.remove("show");
-        void entry.target.offsetWidth; // trik reflow agar browser anggap ini baru
+        void entry.target.offsetWidth; // reset animasi
         entry.target.classList.add("show");
       } else {
-        // Saat keluar viewport, reset (supaya bisa animasi lagi nanti)
         entry.target.classList.remove("show");
       }
     });
-  }, { threshold: 0.4 }); // bisa disesuaikan
+  }, { threshold: 0.4 });
 
   fadeItems.forEach(item => fadeObserver.observe(item));
+
+
+  // 🌸 Doa section — hanya muncul sekali, tidak reset
+  const doaSection = document.querySelector("#doa .dual-layer");
+  if (doaSection) {
+    const doaObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // Tambahkan class show sekali saja
+          entry.target.classList.add("show");
+          // Hentikan pengamatan agar tidak loop
+          doaObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.05 }); // lebih sensitif biar langsung muncul
+
+    doaObserver.observe(doaSection);
+  }
 });
-
-const doaSection = document.querySelector('#doa .dual-layer');
-
-const doaObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('show');
-      doaObserver.unobserve(entry.target); // hentikan agar tidak loop
-    }
-  });
-}, { threshold: 0.5 });
-
-if (doaSection) doaObserver.observe(doaSection);
 
 const btn = document.getElementById("catchMe");
 const cover = document.getElementById("cover");
