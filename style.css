@@ -229,18 +229,19 @@ html, body {
 }
 
 #ayat .base-img {
-  width: 80%;
+  width: 85%;
   max-width: 500px;
   opacity: 0.6;
   z-index: 1;
 }
 
 #ayat .fade-img {
-  width: 80%;
+  width: 85%;
   max-width: 500px;
   position: absolute;
+  top: -1%;
   z-index: 2;
-  opacity: 1;
+  opacity: 0;
 }
 
 /* 🌸 Saat section ayat tampil, munculkan fade-img */
@@ -263,89 +264,207 @@ to { opacity: 1; transform: translateY(0); }
 
 /* 🌸 PARALLAX SECTION (untuk doa) */
 #doa {
-position: relative;
-height: 220vh;
-overflow: hidden;
-display: flex;
-justify-content: center;
-align-items: center;
+  position: relative;
+  height: 220vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* biar isi mulai dari atas */
+  padding-top: 10vh;
 }
 
 /* 🌄 Background parallax (tetap diam) */
 #doa::before {
-content: "";
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background: url('bg4.jpg') center/cover no-repeat;
-z-index: -2;
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('bg4.jpg') center/cover no-repeat;
+  z-index: -3;
 }
 
 /* 🌸 Lapisan lembut */
 #doa::after {
-content: "";
-position: absolute;
-inset: 0;
-backdrop-filter: blur(6px);
-background: rgba(0,0,0,0.5);
-z-index: -1;
+  content: "";
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(6px);
+  background: rgba(0, 0, 0, 0.5);
+  z-index: -2;
 }
 
 /* 🌸 Dual layer container */
 #doa .dual-layer {
-position: relative;
-display: flex;
-justify-content: center;
-align-items: center;
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  z-index: 1;
 }
 
-/* 🌸 Gambar dasar (diam) */
+/* 🌸 Gambar dasar panjang */
 #doa .base-img {
-width: 90%;
-max-width: 500px;
-height: auto;
-opacity: 0.9;
-position: relative;
-z-index: 1;
-}
-
-/* 🌸 Gambar overlay (muncul perlahan di atasnya) */
-#doa .fade-img {
-width: 90%;
-max-width: 500px;
-height: auto;
-position: absolute;
-z-index: 2;
-opacity: 0;
-transform: translateY(60px);
-animation: fadeLayerParallax 2.5s ease forwards;
-animation-delay: 3s;
-}
-#doa.show .fade-img {
+  width: 90%;
+  max-width: 500px;
+  height: auto;
   opacity: 1;
-  transform: translateY(0);
+  position: relative;
+  margin: 0 auto;
+  z-index: 1;
 }
 
-/* 🌈 Animasi fade lembut */
-@keyframes fadeLayerParallax {
-from {
-opacity: 0;
-transform: translateY(60px);
-}
-to {
-opacity: 1;
-transform: translateY(0);
-}
+/* 🌸 Kontainer konten */
+#doa .content-wrapper {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 500px;
+  height: 100%;
+  z-index: 2;
 }
 
-.fade-content {
+/* 🌸 Tiap konten PNG */
+.doa-img {
+  position: absolute;
+  width: 75%;
+  left: 50%;
+  transform: translateX(-50%) translateY(40px);
   opacity: 0;
-  transform: translateY(60px);
   transition: opacity 1s ease, transform 1s ease;
 }
-.fade-content.show {
+
+.con3 {
+  width: 60%;
+}
+/* 🌸 Posisi vertikal (atur sesuai tinggi base panjang) */
+.con1 { top: 7%; }
+.con2 { top: 25%; }
+.con3 { top: 52%; }
+.con4 { top: 65%; }
+
+/* 🌸 Saat animasi aktif (class .show dari JS) */
+.doa-img.show {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateX(-50%) translateY(0);
+}
+
+/* 🌸 Delay animasi halus */
+.doa-img.con1.show { transition-delay: 0.2s; }
+.doa-img.con2.show { transition-delay: 0.4s; }
+.doa-img.con3.show { transition-delay: 0.6s; }
+.doa-img.con4.show { transition-delay: 0.8s; }
+
+#saran.page.section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 100px; /* ruang ekstra saat keyboard naik */
+  box-sizing: border-box;
+}
+
+/* 🌸 Container utama */
+.form-container {
+  background: rgba(0,0,0,0.35);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 40px 30px;
+  width: 90%;
+  max-width: 400px;
+  margin: auto;
+  text-align: center;
+  color: #fff;
+}
+
+/* 🌸 Judul */
+.form-container h2 {
+  font-size: 1.3em;
+  font-weight: 700;
+  margin-bottom: 25px;
+}
+
+/* 🌸 Input umum */
+.input-box {
+  position: relative;
+  margin: 25px 0;
+}
+
+.input-box .input,
+.input-box .textarea {
+  font-size: 16px;
+  outline: none;
+  padding: 12px 15px;
+  display: block;
+  width: 100%;
+  border-radius: 10px;
+  border: 2px solid #999;
+  background: transparent;
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+.input-box .textarea {
+  min-height: 90px;
+  padding-bottom: 100px;
+  resize: none;
+}
+
+/* 🌸 Fokus efek border */
+.input-box .input:focus,
+.input-box .textarea:focus {
+  border-color: #3679ff;
+  box-shadow: 0 0 10px #3679ff33;
+}
+
+/* 🌸 Label karakter */
+.input-box .label {
+  color: #aaa;
+  font-size: 16px;
+  position: absolute;
+  left: 18px;
+  top: 13px;
+  display: flex;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.input-box .char {
+  transition: .2s ease all;
+  transition-delay: calc(var(--index) * .05s);
+}
+
+/* 🌸 Saat fokus / isi ada */
+.input-box .input:focus ~ .label .char,
+.input-box .input:valid ~ .label .char,
+.input-box .textarea:focus ~ .label .char,
+.input-box .textarea:valid ~ .label .char {
+  transform: translateY(-25px);
+  font-size: 14px;
+  color: #3679ff;
+  background: #0008;
+  border-radius: 5px;
+  padding: 0 4px;
+}
+
+/* 🌸 Tombol kirim */
+.submit-btn {
+  background: #3679ff;
+  color: #fff;
+  border: none;
+  padding: 10px 35px;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.submit-btn:hover {
+  background: #275ed8;
 }

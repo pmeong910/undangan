@@ -1,4 +1,4 @@
- //🌸 Scroll ke section berikut (buka undangan)
+// 🌸 Scroll ke section berikut (buka undangan)
 function scrollToNext() {
   const nextSection = document.querySelector("#tanggal");
   if (nextSection) {
@@ -6,71 +6,70 @@ function scrollToNext() {
   }
 }
 
-//🌸 Tombol buka undangan hilang saat scroll lewat cover
+// 🌸 Tombol buka undangan hilang saat scroll lewat cover
 window.addEventListener("scroll", () => {
   const openBtn = document.querySelector("#catchMe");
   const cover = document.querySelector("#cover");
   if (!openBtn || !cover) return;
 
   const coverBottom = cover.getBoundingClientRect().bottom;
-  catchMe.classList.toggle("hide", coverBottom <= 0);
+  openBtn.classList.toggle("hide", coverBottom <= 0);
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  // 🌸 Fade-in untuk tanggal dan ayat (bisa reset)
+  // 🌸 Fade-in untuk tanggal & ayat (boleh reset)
   const fadeItems = document.querySelectorAll("#tanggal, .main-img, #ayat, #ayat .dual-layer");
-
   const fadeObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.remove("show");
-        void entry.target.offsetWidth; // reset animasi
         entry.target.classList.add("show");
       } else {
         entry.target.classList.remove("show");
       }
     });
-  }, { threshold: 0.5 });
+  }, { threshold: 0.4 });
 
   fadeItems.forEach(item => fadeObserver.observe(item));
 
-  // 🌸 Doa section — hanya muncul sekali, tidak reset
-  const doaSection = document.querySelector("#doa .dual-layer");
+  // 🌸 DOA SECTION — animasi muncul sekali saja
+  const doaSection = document.querySelector("#doa");
   if (doaSection) {
     const doaObserver = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          // Tambahkan class show sekali saja
-          entry.target.classList.add("show");
-          // Hentikan pengamatan agar tidak loop
-          doaObserver.unobserve(entry.target);
+          console.log("✅ Doa section terlihat");
+          const doaItems = doaSection.querySelectorAll(".doa-img");
+          doaItems.forEach((img, index) => {
+            setTimeout(() => {
+              img.classList.add("show");
+            }, index * 400);
+          });
+          doaObserver.unobserve(doaSection);
         }
       });
-    }, { threshold: 0.05 });
+    }, { threshold: 0.15 });
+
     doaObserver.observe(doaSection);
   }
-}); 
 
-const btn = document.getElementById("catchMe");
-const cover = document.getElementById("cover");
+  // 🌸 Tombol interaktif “Catch Me”
+  const btn = document.getElementById("catchMe");
+  const cover = document.getElementById("cover");
 
-btn.addEventListener("mouseover", moveButton);
-btn.addEventListener("click", moveButton);
-btn.addEventListener("touchstart", moveButton);
+  if (btn && cover) {
+    btn.addEventListener("mouseover", moveButton);
+    btn.addEventListener("click", moveButton);
+    btn.addEventListener("touchstart", moveButton);
 
-function moveButton() {
-  const rect = cover.getBoundingClientRect();
-  const maxX = rect.width - btn.offsetWidth;
-  const maxY = rect.height - btn.offsetHeight;
+    function moveButton() {
+      const rect = cover.getBoundingClientRect();
+      const maxX = rect.width - btn.offsetWidth;
+      const maxY = rect.height - btn.offsetHeight;
+      const randomX = Math.random() * maxX;
+      const randomY = Math.random() * maxY;
 
-  const randomX = Math.random() * maxX;
-  const randomY = Math.random() * maxY;
-
-  btn.style.left = `${randomX}px`;
-  btn.style.top = `${randomY}px`;
-}
-document.querySelectorAll(".flip-card").forEach(card => {
-  card.addEventListener("click", () => {
-    card.classList.toggle("flipped");
-  });
+      btn.style.left = `${randomX}px`;
+      btn.style.top = `${randomY}px`;
+    }
+  }
 });

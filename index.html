@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>Egah & Nicah Wedding</title>
   <link rel="stylesheet" href="style.css?v=2">
 <link href="https://fonts.googleapis.com/css2?family=poppins&family=Montserrat+Alternates&family=Bilbo+Swash+Caps&display=swap" rel="stylesheet">
@@ -23,7 +23,7 @@
 
  <!-- hal2 -->
 <section id="tanggal" class="page section">
-  <img src="hal2.png" class="main-img">
+  <img src="hal2.png" loading="lazy" class="main-img">
 <dotlottie-wc
 id= 'swipe'
 src="https://lottie.host/40cfc9bf-2774-41e4-9436-592927122b7e/BK5QfbjIdN.lottie" style="width: 300px;height: 300px" autoplay loop></dotlottie-wc>
@@ -32,8 +32,8 @@ src="https://lottie.host/40cfc9bf-2774-41e4-9436-592927122b7e/BK5QfbjIdN.lottie"
  <!-- hal3 -->
 <section id="ayat" class="page section">
   <div class="dual-layer fade-content">
-    <img src="hal3.png" class="base-img" alt="lapisan dasar">
-    <img src="hal3(2).png" class= "fade-img" alt="lapisan animasi">
+    <img src="hal3.png" loading="lazy" class="base-img" alt="lapisan dasar">
+    <img src="hal3(2).png" loading="lazy" class= "fade-img" alt="lapisan animasi">
   </div>
 </section>
 
@@ -41,7 +41,43 @@ src="https://lottie.host/40cfc9bf-2774-41e4-9436-592927122b7e/BK5QfbjIdN.lottie"
 <section id="doa" class="page section">
   <div class="dual-layer fade-content">
     <img src="hal4.png" class="base-img" alt="Lapisan dasar doa">
-    <img src="hal4(2).png" class="fade-img" alt="Lapisan efek doa">
+    <div class="content-wrapper">
+      <img src="con1.png" class="doa-img con1" alt="konten 1">
+      <img src="con2.png" class="doa-img con2" alt="konten 2">
+      <img src="con3.png" class="doa-img con3" alt="konten 3">
+      <img src="con4.png" class="doa-img con4" alt="konten 4">
+    </div>
+  </div>
+</section>
+
+<section id="saran" class="page section">
+  <div class="saran-container">
+    <h2 class="saran-title">💬 Kotak Saran</h2>
+
+    <form class="saran-form">
+      <div class="input-box">
+        <input required type="text" class="input" id="nama">
+        <label class="label" for="nama">
+          <span class="char" style="--index:0; padding-left:5px;">N</span>
+          <span class="char" style="--index:1;">a</span>
+          <span class="char" style="--index:2;">m</span>
+          <span class="char" style="--index:3;">a</span>
+        </label>
+      </div>
+
+      <div class="input-box">
+      <textarea required class="textarea"></textarea>
+      <label class="label">
+        <span class="char" style="--index:0;">S</span>
+        <span class="char" style="--index:1;">a</span>
+        <span class="char" style="--index:2;">r</span>
+        <span class="char" style="--index:3;">a</span>
+        <span class="char" style="--index:4;">n</span>
+      </label>
+    </div>
+    
+      <button type="submit" class="saran-btn">Kirim</button>
+    </form>
   </div>
 </section>
 
