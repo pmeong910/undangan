@@ -1,4 +1,4 @@
-// 🌸 Scroll ke section berikut (buka undangan)
+ //🌸 Scroll ke section berikut (buka undangan)
 function scrollToNext() {
   const nextSection = document.querySelector("#tanggal");
   if (nextSection) {
@@ -6,7 +6,7 @@ function scrollToNext() {
   }
 }
 
-// 🌸 Tombol buka undangan hilang saat scroll lewat cover
+//🌸 Tombol buka undangan hilang saat scroll lewat cover
 window.addEventListener("scroll", () => {
   const openBtn = document.querySelector("#catchMe");
   const cover = document.querySelector("#cover");
@@ -47,11 +47,10 @@ document.addEventListener("DOMContentLoaded", () => {
           doaObserver.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.05 }); // lebih sensitif biar langsung muncul
-
+    }, { threshold: 0.05 });
     doaObserver.observe(doaSection);
   }
-});
+}); 
 
 const btn = document.getElementById("catchMe");
 const cover = document.getElementById("cover");

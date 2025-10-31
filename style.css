@@ -3,6 +3,8 @@ html, body {
   margin: 0;
   padding: 0;
   height: 100%;
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
   overflow-x: hidden;
   scroll-behavior: smooth;
 }
@@ -20,9 +22,11 @@ html, body {
 
 /* 🌸 BACKGROUND FIX */
 .page {
+  scroll-snap-align: start;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  transition: transform 0.8s ease, opacity 0.8s ease;
 }
 
 .page::before {
