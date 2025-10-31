@@ -197,7 +197,7 @@ html, body {
   align-items: center;
 }
 
-/* 🌄 Gambar background */
+/*  Gambar background */
 #ayat::before {
   content: "";
   position: absolute;
