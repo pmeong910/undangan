@@ -18,7 +18,7 @@ window.addEventListener("scroll", () => {
 
 document.addEventListener("DOMContentLoaded", () => {
   // 🌸 Fade-in untuk tanggal dan ayat (bisa reset)
-  const fadeItems = document.querySelectorAll("#tanggal .main-img, #ayat .dual-layer");
+  const fadeItems = document.querySelectorAll("#tanggal, .main-img, #ayat, #ayat .dual-layer");
 
   const fadeObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -30,10 +30,9 @@ document.addEventListener("DOMContentLoaded", () => {
         entry.target.classList.remove("show");
       }
     });
-  }, { threshold: 0.4 });
+  }, { threshold: 0.5 });
 
   fadeItems.forEach(item => fadeObserver.observe(item));
-
 
   // 🌸 Doa section — hanya muncul sekali, tidak reset
   const doaSection = document.querySelector("#doa .dual-layer");
@@ -70,3 +69,8 @@ function moveButton() {
   btn.style.left = `${randomX}px`;
   btn.style.top = `${randomY}px`;
 }
+document.querySelectorAll(".flip-card").forEach(card => {
+  card.addEventListener("click", () => {
+    card.classList.toggle("flipped");
+  });
+});
