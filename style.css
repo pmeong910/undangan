@@ -202,7 +202,6 @@ html, body {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: url('bg3.jpg');
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -282,7 +281,7 @@ to { opacity: 1; transform: translateY(0); }
   left: 0;
   width: 100%;
   height: 100%;
-  background: url('bg4.jpg') center/cover no-repeat;
+  background: url('bg34.jpg') center/cover no-repeat;
   z-index: -5;
 }
 
@@ -363,139 +362,92 @@ to { opacity: 1; transform: translateY(0); }
 .doa-img.con3.show { transition-delay: 0.6s; }
 .doa-img.con4.show { transition-delay: 0.8s; }
 
-
-#saran.page.section {
-  position: relative;
-  min-height: 100vh;
-  background: url('bg5.jpg') center/cover no-repeat;
+/* 🌸 COUNTDOWN SECTION */
+#countdown {
+  background: url('bg6.jpg') center/cover no-repeat;
   display: flex;
   justify-content: center;
   align-items: center;
-  box-sizing: border-box;
-  z-index: 5;
+  flex-direction: column;
+  color: #fff;
+  text-align: center;
+  position: relative;
 }
-.saran-container {
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(8px);
-  border-radius: 15px;
-  padding: 30px 20px;
-  width: 100%;
-  max-width: 400px;
-  /* 🌸 tambahkan tinggi minimal */
-  height: 100%; /* ubah nilai sesuai selera, misal 550px */
+
+#countdown::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 0;
+}
+
+.countdown-container {
+  position: relative;
+  z-index: 2;
+  animation: fadeUpTitle 1.2s ease forwards;
+}
+
+.save-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  margin-bottom: 30px;
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeUpTitle 1s ease forwards;
+}
+
+.time-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 35px;
+}
+
+.time-box {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  padding-bottom: 100px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.2);
-}
-/* 🌸 Container utama */
-.form-container {
-  background: rgba(0,0,0,0.35);
-  backdrop-filter: blur(10px);
-  border-radius: 20px;
-  padding: 40px 30px;
-  width: 90%;
-  max-width: 400px;
-  margin: auto;
-  text-align: center;
-  color: #fff;
-}
-#saran {
-  position: relative;
-  isolation: isolate; /* 🧱 memaksa lapisan di bawahnya tidak terlihat */
+  min-width: 70px;
 }
 
-/* 🌸 Judul */
-.form-container h2 {
-  font-size: 1.3em;
-  font-weight: 700;
-  margin-bottom: 25px;
-}
-.saran-title h2{
-  color: #fff;
+.time {
+  font-size: 42px;
+  font-weight: bold;
 }
 
-/* 🌸 Input umum */
-.input-box {
-  position: relative;
-  margin: 25px 0;
-}
-
-.input-box .input,
-.input-box .textarea {
+.label {
   font-size: 16px;
-  outline: none;
-  padding: 12px 15px;
-  display: block;
-  width: 100%;
-  border-radius: 10px;
-  border: 2px solid #999;
-  background: transparent;
-  color: #fff;
-  transition: all 0.3s ease;
+  opacity: 0.85;
 }
 
-.input-box .textarea {
-  min-height: 90px;
-  padding-bottom: 100px;
-  resize: none;
+/* ✨ Animasi Fade Up */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* 🌸 Fokus efek border */
-.input-box .input:focus,
-.input-box .textarea:focus {
-  border-color: #3679ff;
-  box-shadow: 0 0 10px #3679ff33;
+.fade-item {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp 0.8s ease forwards;
 }
 
-/* 🌸 Label karakter */
-.input-box .label {
-  color: #aaa;
-  font-size: 16px;
-  position: absolute;
-  left: 18px;
-  top: 13px;
-  display: flex;
-  pointer-events: none;
-  transition: all 0.3s ease;
-}
+.fade-item.item1 { animation-delay: 0.3s; }
+.fade-item.item2 { animation-delay: 0.6s; }
+.fade-item.item3 { animation-delay: 0.9s; }
+.fade-item.item4 { animation-delay: 1.2s; }
 
-.input-box .char {
-  transition: .2s ease all;
-  transition-delay: calc(var(--index) * .05s);
-}
-
-/* 🌸 Saat fokus / isi ada */
-.input-box .input:focus ~ .label .char,
-.input-box .input:valid ~ .label .char,
-.input-box .textarea:focus ~ .label .char,
-.input-box .textarea:valid ~ .label .char {
-  transform: translateY(-25px);
-  font-size: 14px;
-  color: #3679ff;
-  background: #0008;
-  border-radius: 5px;
-  padding: 0 4px;
-}
-
-/* 🌸 Tombol kirim */
-.submit-btn {
-  background: #3679ff;
-  color: #fff;
-  border: none;
-  padding: 10px 35px;
-  border-radius: 10px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.submit-btn:hover {
-  background: #275ed8;
-}
-
-body.parallax-off #doa::before {
-  position: absolute !important;
+/* ✨ Fade judul */
+@keyframes fadeUpTitle {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
