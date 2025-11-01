@@ -7,6 +7,7 @@ html, body {
   overflow-y: scroll;
   overflow-x: hidden;
   scroll-behavior: smooth;
+  overscroll-behavior: contain;
 }
 
 .page, .section {
@@ -282,7 +283,7 @@ to { opacity: 1; transform: translateY(0); }
   width: 100%;
   height: 100%;
   background: url('bg4.jpg') center/cover no-repeat;
-  z-index: -3;
+  z-index: -5;
 }
 
 /* 🌸 Lapisan lembut */
@@ -292,7 +293,7 @@ to { opacity: 1; transform: translateY(0); }
   inset: 0;
   backdrop-filter: blur(6px);
   background: rgba(0, 0, 0, 0.5);
-  z-index: -2;
+  z-index: -4;
 }
 
 /* 🌸 Dual layer container */
@@ -308,10 +309,10 @@ to { opacity: 1; transform: translateY(0); }
 
 /* 🌸 Gambar dasar panjang */
 #doa .base-img {
-  width: 90%;
+  width: 95%;
   max-width: 500px;
   height: auto;
-  opacity: 1;
+  opacity: 80;
   position: relative;
   margin: 0 auto;
   z-index: 1;
@@ -338,14 +339,16 @@ to { opacity: 1; transform: translateY(0); }
   opacity: 0;
   transition: opacity 1s ease, transform 1s ease;
 }
-
+.con1 {
+  width: 90%;
+}
 .con3 {
   width: 60%;
 }
 /* 🌸 Posisi vertikal (atur sesuai tinggi base panjang) */
-.con1 { top: 7%; }
+.con1 { top: 4%; }
 .con2 { top: 25%; }
-.con3 { top: 52%; }
+.con3 { top: 53%; }
 .con4 { top: 65%; }
 
 /* 🌸 Saat animasi aktif (class .show dari JS) */
@@ -360,16 +363,33 @@ to { opacity: 1; transform: translateY(0); }
 .doa-img.con3.show { transition-delay: 0.6s; }
 .doa-img.con4.show { transition-delay: 0.8s; }
 
+
 #saran.page.section {
   position: relative;
   min-height: 100vh;
+  background: url('bg5.jpg') center/cover no-repeat;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-bottom: 100px; /* ruang ekstra saat keyboard naik */
   box-sizing: border-box;
+  z-index: 5;
 }
-
+.saran-container {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  border-radius: 15px;
+  padding: 30px 20px;
+  width: 100%;
+  max-width: 400px;
+  /* 🌸 tambahkan tinggi minimal */
+  height: 100%; /* ubah nilai sesuai selera, misal 550px */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 100px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+}
 /* 🌸 Container utama */
 .form-container {
   background: rgba(0,0,0,0.35);
@@ -382,12 +402,19 @@ to { opacity: 1; transform: translateY(0); }
   text-align: center;
   color: #fff;
 }
+#saran {
+  position: relative;
+  isolation: isolate; /* 🧱 memaksa lapisan di bawahnya tidak terlihat */
+}
 
 /* 🌸 Judul */
 .form-container h2 {
   font-size: 1.3em;
   font-weight: 700;
   margin-bottom: 25px;
+}
+.saran-title h2{
+  color: #fff;
 }
 
 /* 🌸 Input umum */
@@ -467,4 +494,8 @@ to { opacity: 1; transform: translateY(0); }
 
 .submit-btn:hover {
   background: #275ed8;
+}
+
+body.parallax-off #doa::before {
+  position: absolute !important;
 }

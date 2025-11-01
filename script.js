@@ -17,40 +17,49 @@ window.addEventListener("scroll", () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  // 🌸 Fade-in untuk tanggal & ayat (boleh reset)
-  const fadeItems = document.querySelectorAll("#tanggal, .main-img, #ayat, #ayat .dual-layer");
-  const fadeObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("show");
-      } else {
-        entry.target.classList.remove("show");
-      }
-    });
-  }, { threshold: 0.4 });
+  const fadeItems = document.querySelectorAll("#tanggal, .main-img, #ayat, #ayat .dual-layer, .fade-img, #doa, .doa-img");
+  let lastScrollY = window.scrollY;
+  let scrollDir = "down";
 
-  fadeItems.forEach(item => fadeObserver.observe(item));
+  // 🔁 Deteksi arah scroll
+  window.addEventListener(
+    "scroll",
+    () => {
+      const y = window.scrollY;
+      scrollDir = y > lastScrollY ? "down" : "up";
+      lastScrollY = y;
+    },
+    { passive: true }
+  );
 
-  // 🌸 DOA SECTION — animasi muncul sekali saja
-  const doaSection = document.querySelector("#doa");
-  if (doaSection) {
-    const doaObserver = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          console.log("✅ Doa section terlihat");
-          const doaItems = doaSection.querySelectorAll(".doa-img");
-          doaItems.forEach((img, index) => {
-            setTimeout(() => {
-              img.classList.add("show");
-            }, index * 400);
-          });
-          doaObserver.unobserve(doaSection);
+  // 🔍 Observer
+  const fadeObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const el = entry.target;
+        const rect = el.getBoundingClientRect();
+        const viewportH = window.innerHeight;
+
+        // 🟢 Jika elemen MASUK viewport & scroll ke bawah → tampil
+        if (entry.isIntersecting && scrollDir === "down") {
+          el.classList.add("show");
+        }
+
+        // 🔴 Jika elemen KELUAR & scroll ke bawah → reset hanya bila keluar lewat bawah
+        if (!entry.isIntersecting && scrollDir === "down") {
+          if (rect.top > viewportH) {
+            el.classList.remove("show");
+          }
         }
       });
-    }, { threshold: 0.15 });
+    },
+    {
+      threshold: 0.2, // sensitivitas muncul
+      rootMargin: "0px 0px -10% 0px", // sedikit buffer bawah
+    }
+  );
 
-    doaObserver.observe(doaSection);
-  }
+  fadeItems.forEach((item) => fadeObserver.observe(item));
 
   // 🌸 Tombol interaktif “Catch Me”
   const btn = document.getElementById("catchMe");
@@ -73,3 +82,18 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 });
+
+const saranSection = document.querySelector("#saran");
+if (saranSection) {
+  const saranObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        document.body.classList.add("parallax-off");
+      } else {
+        document.body.classList.remove("parallax-off");
+      }
+    });
+  }, { threshold: 0.9 });
+
+  saranObserver.observe(saranSection);
+}
