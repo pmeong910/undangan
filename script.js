@@ -17,7 +17,9 @@ window.addEventListener("scroll", () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  const fadeItems = document.querySelectorAll("#tanggal, .main-img, #ayat, #ayat .dual-layer, .fade-img, #doa, .doa-img, #countdown, .fade-item");
+  const fadeItems = document.querySelectorAll(
+    "#tanggal, .main-img, #ayat, #ayat .dual-layer, .fade-img, #doa, .doa-item, #countdown, #countdown .fade-item, #acara .acara-img"
+  );
   let lastScrollY = window.scrollY;
   let scrollDir = "down";
 
