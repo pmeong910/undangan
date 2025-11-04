@@ -343,10 +343,10 @@ to { opacity: 1; transform: translateY(0); }
 }
 
 /* 🌸 Posisi vertikal */
-.con1 { top: 0%; }
+.con1 { top: 5%; }
 .con2 { top: 15%; }
-.con3 { top: 54%; }
-.con4 { top: 72%; }
+.con3 { top: 55%; }
+.con4 { top: 60%; }
 
 /* 🌸 Saat muncul */
 .doa-item.show {
@@ -354,6 +354,24 @@ to { opacity: 1; transform: translateY(0); }
   transform: translateX(-50%) translateY(0);
 }
 
+.and-symbol {
+  font-family: "Poppins", sans-serif; /* bisa diganti sesuai tema */
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: #000;
+  text-align: center;
+  letter-spacing: 2px;
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
+  transform: translateY(40px);
+  opacity: 0;
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+/* efek muncul saat .con3 mendapat class show */
+.con3.show .and-symbol {
+  opacity: 1;
+  transform: translateY(0);
+}
 /* 🌸 Delay animasi halus */
 .doa-item.con1.show { transition-delay: 0.2s; }
 .doa-item.con2.show { transition-delay: 0.4s; }
@@ -388,6 +406,27 @@ to { opacity: 1; transform: translateY(0); }
 .frame-group .f2 { top: 0; left: 50; width: 95%; }
 .frame-group .ff { top: 0; left: 50; width: 95%; }
 
+/* 🌸 Animasi berayun lembut */
+@keyframes swing {
+  0%   { transform: translateX(-50%) rotate(0deg); }
+  50%  { transform: translateX(-50%) rotate(1deg); }
+  100% { transform: translateX(-50%) rotate(-1deg); }
+}
+
+/* 🌸 Terapkan ke bunga kiri dan kanan */
+.frame-group .f1,
+.frame-group .f2 {
+  animation: swing 6s ease-in-out infinite alternate;
+  transform-origin: center top; /* titik ayun */
+}
+.frame-group .f1 {
+  animation-delay: 0s;
+}
+
+.frame-group .f2 {
+  animation-delay: 0.6s;
+}
+
 /* 🌸 Nama di bawah frame */
 .nama {
   margin-top: 250px;
@@ -396,7 +435,7 @@ to { opacity: 1; transform: translateY(0); }
 .nama h3 {
   font-size: 1.2rem;
   margin-bottom: 5px;
-  color: #fff;
+  color: #000;
 }
 
 .nama p {
@@ -408,13 +447,13 @@ to { opacity: 1; transform: translateY(0); }
   font-family: "Poppins", sans-serif;
   font-size: 1.4rem;
   font-weight: 600;
-  color: #fff;
+  color: #000;
   margin-bottom: 10px;
 }
 .con1 p {
   font-family: "Poppins", sans-serif;
   font-size: 0.95rem;
-  color: #eee;
+  color: #000;
   line-height: 1.6;
   max-width: 400px;
   margin: 0 auto;
