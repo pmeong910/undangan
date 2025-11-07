@@ -214,8 +214,8 @@ html, body {
   content: "";
   position: absolute;
   inset: 0;
-  backdrop-filter: blur(0px);
-  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(1px);
+  background: rgba(0, 0, 0, 0.1);
   z-index: -1;
 }
 
@@ -302,13 +302,28 @@ to { opacity: 1; transform: translateY(0); }
   z-index: 1;
 }
 
-/* 🌸 Gambar dasar panjang */
+/* 🌸 Gambar dasar panjan
 #doa .base-img {
   width: 90%;
   max-width: none;
   height: auto;
   opacity: 1;
   margin: 0 auto;
+  z-index: 1;
+} */
+#doa .base-pill {
+  position: relative;
+  width: 90%;
+  max-width: 500px;
+  height: 200vh;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.35); /* semi transparan */
+  backdrop-filter: blur(8px), brightness(1.1);
+  border-radius: 500px;
+  box-shadow:
+    inset 0 2px 6px rgba(255, 255, 255, 0.4),
+    inset 0 -3px 8px rgba(0, 0, 0, 0.3),
+    0 6px 20px rgba(0, 0, 0, 0.15);  overflow: hidden;
   z-index: 1;
 }
 
@@ -416,7 +431,7 @@ to { opacity: 1; transform: translateY(0); }
 /* 🌸 Terapkan ke bunga kiri dan kanan */
 .frame-group .f1,
 .frame-group .f2 {
-  animation: swing 6s ease-in-out infinite alternate;
+  animation: swing 3s ease-in-out infinite alternate;
   transform-origin: center top; /* titik ayun */
 }
 .frame-group .f1 {
@@ -429,18 +444,33 @@ to { opacity: 1; transform: translateY(0); }
 
 /* 🌸 Nama di bawah frame */
 .nama {
-  margin-top: 250px;
+  position: relative;
+  z-index: 5;
+  line-height: 1.1;
+}
+.nama .panggilan {
+  font-size: 4rem;
+  color: #000;
+  font-family: 'Love Light', cursive;
+  margin-top: 125px;
+  margin-bottom: 0.1px;
+  letter-spacing: 2px;
+  line-height: 1.1;
 }
 
 .nama h3 {
   font-size: 1.2rem;
-  margin-bottom: 5px;
+  margin-bottom: 1px;
+  line-height: 1.1;
   color: #000;
 }
 
 .nama p {
   font-size: 0.9rem;
   opacity: 0.9;
+  line-height: 1.1;
+  margin-bottom: 5px;
+  color: #000;
 }
 /* 🌸 Tambahan teks atas (Doa & Ucapan) */
 .con1 h2 {
